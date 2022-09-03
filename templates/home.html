@@ -2,10 +2,10 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 {% if user.is_authenticated %}
-    嗨! {{ user.username }}......
+    <h1 class="text-3xl text-red-400 text-bold">嗨! {{ user.username }}......</h1>
     <p><a href="{% url 'logout' %}">登出</a></p>
 {% else %}
-    <p>你尚未登錄</p>
+    <h1 class="text-3xl text-red-400 text-bold">T你尚未登錄</h1>
     <a href="{% url 'login' %}">登錄</a> |
     <a href="{% url 'signup' %}">註冊</a>
 {% endif %}
