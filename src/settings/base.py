@@ -11,23 +11,11 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from dotenv import load_dotenv, find_dotenv
+from dotenv import load_dotenv, find_dotenv
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-t5^v2j8ln7jt@2y!oml0y(ci1f)#)7)cfr&fzpk+95td1%ycwt"
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['*']
-
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # Application definition
 
@@ -41,6 +29,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "users",
     "pages",
+    "django_extensions",
 ]
 
 MIDDLEWARE = [
@@ -57,15 +46,6 @@ MIDDLEWARE = [
 ROOT_URLCONF = "src.urls"
 AUTH_USER_MODEL = 'users.CustomUser'
 
-CSRF_TRUSTED_ORIGINS = [
-    "http://ryowuandjanet-djangotemplate-vjxj7vp4552jwr-3000.githubpreview.dev",
-    "https://ryowuandjanet-djangotemplate-vjxj7vp4552jwr-3000.githubpreview.dev",
-] #发起请求的URL要求添加端口和http
-
-CORS_ALLOWED_ORIGINS = [
-    "http://ryowuandjanet-djangotemplate-vjxj7vp4552jwr-3000.githubpreview.dev",
-    "https://ryowuandjanet-djangotemplate-vjxj7vp4552jwr-3000.githubpreview.dev",
-] # 发起请求的地址，不需要添加http和端口
 
 TEMPLATES = [
     {
@@ -84,6 +64,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "src.wsgi.application"
+
+load_dotenv(find_dotenv())
+
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
@@ -95,17 +78,6 @@ EMAIL_HOST_USER = 'ryowu0329@gmail.com'  #寄件者電子郵件
 EMAIL_HOST_PASSWORD = 'pnlsuzdjtynglxkd'  #Gmail應用程式的密碼
 
 load_dotenv(find_dotenv())
-
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
