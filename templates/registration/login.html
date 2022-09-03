@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}登錄{% endblock %}
+{% block content %}
+    <h2>登錄</h2>
+    <form method="POST">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">登錄</button>
+        <a href="{% url "password_reset" %}">忘記密碼?</a>
+    </form>
+{% endblock %}
