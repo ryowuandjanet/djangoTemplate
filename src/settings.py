@@ -6,7 +6,6 @@ env=Env()
 Env.read_env()
 
 ENVIRONMENT = env('ENVIRONMENT',default="production")
-ENVIRONMENT = 'production'
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
