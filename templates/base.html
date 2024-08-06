@@ -9,12 +9,14 @@
     {% else %}
         <link rel="stylesheet" href="{% static 'css/style.min.css' %}" />
     {% endif %}
+    
+    <script defer src="{% static 'js/modal.js' %}"></script>
     <title>
         {% block head_title %}
         {% endblock head_title %}
     </title>
 </head>
-<body>
+<body class="bg-gray-100 font-sans">
     {% block content %}
     {% endblock content %}
 </body>

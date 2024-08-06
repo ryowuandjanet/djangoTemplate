@@ -28,6 +28,7 @@ INTERNAL_IPS={
 }
 
 INSTALLED_APPS = [
+	'jazzmin',
 	"django.contrib.admin",
 	"django.contrib.auth",
 	"django.contrib.contenttypes",
@@ -35,8 +36,9 @@ INSTALLED_APPS = [
 	"django.contrib.messages",
 	"django.contrib.staticfiles",
 	"cloudinary_storage",
-  "cloudinary",
-
+	"cloudinary",
+	"import_export",
+	"app"
 ]
 
 MIDDLEWARE = [
@@ -127,7 +129,17 @@ EMAIL_USE_TLS=True
 DEFAULT_FROM_EMAIL=f"Django App Name {env('EMAIL_ADDRESS')}"
 ACCOUNT_EMAIL_SUBJECT_PREFIX=''
 
-
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 
+JAZZMIN_SETTINGS = {
+    'site_title': '毛毛與秀秀的資料庫',
+    'site_header': 'Hello World',
+    'site_brand': 'I am brand',
+    'welcome_sign': '歡迎來到毛毛與秀秀的資料庫',
+    'copyright': 'ryowuandjanet.com',
+}
+
+from import_export.formats.base_formats import XLSX, CSV,JSON
+EXPORT_FORMATS = [XLSX, CSV,JSON]
+IMPORT_FORMATS = [XLSX, CSV,JSON]

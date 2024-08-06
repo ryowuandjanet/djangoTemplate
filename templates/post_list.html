@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block head_title %}
+    Post List   
+{% endblock head_title %}
+
+{% block content %}
+<div class="container mx-auto p-4">
+    <header class="mb-6">
+        <h1 class="text-4xl font-bold text-gray-800">Post List</h1>
+        <button data-modal-target="modal-create" class="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Create New Post</button>
+    </header>
+
+    {% if posts %}
+        <ul class="space-y-4">
+            {% for post in posts %}
+                <li class="bg-white shadow-md rounded-lg p-4 relative">
+                    <h2 class="text-2xl font-semibold text-gray-900">{{ post.title }}</h2>
+                    <p class="mt-2 text-gray-700">{{ post.content }}</p>
+                    <div class="mt-4 flex space-x-4">
+                        <button data-modal-target="modal-edit-{{ post.pk }}" class="text-blue-500 hover:underline">Edit</button>
+                        <button data-modal-target="modal-delete-{{ post.pk }}" class="text-red-500 hover:underline">Delete</button>
+                    </div>
+                </li>
+            {% empty %}
+                <li class="bg-white shadow-md rounded-lg p-4 text-center text-gray-600">No posts available.</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+
+<!-- Modal for Create Post -->
+<div id="modal-create" class="fixed inset-0 bg-gray-500 bg-opacity-50 z-50 hidden">
+    <div class="flex items-center justify-center min-h-screen">
+        <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6">
+            <h2 class="text-xl font-bold mb-4">Create New Post</h2>
+            {% include 'post_form.html' %}
+            <div class="flex justify-end mt-4">
+                <button type="button" data-modal-close class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Edit Post -->
+{% for post in posts %}
+    <div id="modal-edit-{{ post.pk }}" class="fixed inset-0 bg-gray-500 bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen">
+            <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6">
+                <h2 class="text-xl font-bold mb-4">Edit Post</h2>
+                {% include 'post_form.html' with post=post %}
+                <div class="flex justify-end mt-4">
+                    <button type="button" data-modal-close class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+<!-- Modal for Delete Post -->
+{% for post in posts %}
+    <div id="modal-delete-{{ post.pk }}" class="fixed inset-0 bg-gray-500 bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen">
+            <div class="bg-white rounded-lg shadow-lg max-w-sm w-full p-6">
+                <h2 class="text-xl font-bold mb-4">Confirm Delete</h2>
+                <p class="mb-4">Are you sure you want to delete "{{ post.title }}"? This action cannot be undone.</p>
+                <form method="POST" action="{% url 'post_delete' post.pk %}">
+                    {% csrf_token %}
+                    <div class="flex justify-end space-x-4">
+                        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Delete</button>
+                        <button type="button" data-modal-close class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+{% endblock content %}
