@@ -4,6 +4,7 @@ from .forms import ArticleForm
 
 def article_list(request):
     articles = Article.objects.all()
+    print(articles)
     return render(request, 'article_list.html', {'articles': articles})
 
 def article_create(request):
