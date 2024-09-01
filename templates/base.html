@@ -1,20 +1,26 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/sweetalert2.min.css' %}" rel="stylesheet" />
     <title>
-        {% block head_title %}
-        {% endblock head_title %}
+      {% block head_title %}
+
+      {% endblock %}
     </title>
-</head>
-<body>
+  </head>
+  <body>
     {% block content %}
-    {% endblock content %}
+
+    {% endblock %}
     <!-- Bootstrap Bundle with Popper -->
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-    {% block extra_js %}{% endblock extra_js %}
-</body>
+    <script src="{% static 'js/sweetalert2.all.min.js' %}"></script>
+    {% block extra_js %}
+
+    {% endblock %}
+  </body>
 </html>

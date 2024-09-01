@@ -35,11 +35,15 @@ INSTALLED_APPS = [
 	"django.contrib.sessions",
 	"django.contrib.messages",
 	"django.contrib.staticfiles",
+  'allauth',
+  'allauth.account',
   'import_export',
 	"cloudinary_storage",
 	"cloudinary",
 	'myapp',
 ]
+
+
 
 MIDDLEWARE = [
 	"django.middleware.security.SecurityMiddleware",
@@ -50,6 +54,7 @@ MIDDLEWARE = [
 	"django.contrib.messages.middleware.MessageMiddleware",
 	"django.middleware.clickjacking.XFrameOptionsMiddleware",
   "whitenoise.middleware.WhiteNoiseMiddleware",
+  "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = "src.urls"
@@ -129,14 +134,10 @@ EMAIL_USE_TLS=True
 DEFAULT_FROM_EMAIL=f"Django App Name {env('EMAIL_ADDRESS')}"
 ACCOUNT_EMAIL_SUBJECT_PREFIX=''
 
-
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_REQUIRED = True
-
 JAZZMIN_SETTINGS = {
     'site_title': '毛毛與秀秀的資料庫',
     'site_header': 'Hello World',
-    'site_brand': 'I am brand',
+    'site_brand': '毛毛與秀秀的家',
     'welcome_sign': '歡迎來到毛毛與秀秀的資料庫',
     'copyright': 'ryowuandjanet.com',
 }
@@ -145,4 +146,15 @@ from import_export.formats.base_formats import XLSX, CSV,JSON
 EXPORT_FORMATS = [XLSX, CSV,JSON]
 IMPORT_FORMATS = [XLSX, CSV,JSON]
 
+AUTHENTICATION_BACKENDS = (
+  "django.contrib.auth.backends.ModelBackend",
+  "allauth.account.auth_backends.AuthenticationBackend",
+)
 
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'optional'  # or 'mandatory'
